@@ -1,0 +1,67 @@
+@model ViewTask.Models.Order
+
+<head>
+    <style>
+
+        .delivery-time-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .cart-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+        }
+
+
+        .cart-form__input {
+            max-width: 150px;
+        }
+
+        .cart-form__supermarkets-select {
+            max-width: 150px;
+        }
+
+        .cart-form__product-select{
+            height: 100px;
+            max-width: 150px;
+        }
+
+        .cart-form__submit-button{
+            max-width: 150px;
+        }
+    </style>
+</head>
+
+<main>
+    <h1>@ViewData["Title"]</h1>
+
+    @using (Html.BeginForm("ShoppingCart", "Tasks", FormMethod.Post)){
+        @Html.Label("fullName", "Input your fullname:")
+        <br />
+        @Html.TextBoxFor(m => m.Name, new { @class = "cart-form__input" })     
+        <br />
+        @Html.Label("address", "Input your address:")
+        <br />
+        @Html.TextBoxFor(m => m.Address, new { @class = "cart-form__input" })     
+        <br />
+        @Html.DropDownListFor(m => m.Supermarket, (IEnumerable<SelectListItem>)ViewBag.supermarkets, "Select Supermarket", htmlAttributes: new { @class = "cart-form__supermarkets-select"});
+        <br />
+
+        <ul class="delivery-time-list">
+            @foreach (DateTime deliveryTime in ViewBag.deliveryTimes)
+            {
+                 <li>
+                    @Html.RadioButtonFor(m => m.DeliveryTime, @deliveryTime.ToString("M/d/yyyy h:mm:ss tt"), htmlAttributes: new { name = @deliveryTime})
+                    <label for=@deliveryTime>@deliveryTime</label>
+                 </li>
+            }
+
+        </ul>
+
+        @Html.ListBoxFor(m => m.Products, (IEnumerable<SelectListItem>)ViewBag.products, htmlAttributes: new { @class = "cart-form__product-select"});
+        <br />
+        <button type="submit" class="cart-form__submit-button">Send</button>
+    }
+</main>

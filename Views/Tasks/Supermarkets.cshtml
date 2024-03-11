@@ -1,0 +1,23 @@
+@model IEnumerable<Supermarket>
+
+@{
+    ViewData["Title"] = "Our Supermarkets";
+}
+
+<h1>@ViewData["Title"]</h1>
+<h2>There are 5 markets:</h2>
+
+<div>
+    <ul style="list-style-type:none; padding:0;">
+        @foreach (var market in Model)
+        {
+            <li>
+                <a style="padding-left: 0;"
+                   class="nav-link text-dark"
+                   href="@market.URL" target="_blank">
+                    @market.Name
+                </a>
+            </li>
+        }
+    </ul>
+</div>

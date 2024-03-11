@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "It`s time to shopping!";
+}
+
+@inject ViewTask.Services.ITimeService Timer
+
+<h2>@ViewData["Title"]</h2>
+
+<p>@Timer.GetTimeForTomorrow()</p>

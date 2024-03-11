@@ -1,0 +1,85 @@
+@{
+    ViewData["Title"] = "Greetings";
+    TimeZoneInfo easternEuropeanTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Europe/Kiev");
+    DateTime currentDate = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, easternEuropeanTimeZone);
+}
+
+<head>
+    <style>
+        table {
+            border-collapse: collapse;
+
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            /* Add borders to table cells */
+            padding: 8px;
+            /* Add padding to cell content */
+            text-align: left;
+            /* Align cell content to the left */
+        }
+    </style>
+</head>
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <p>
+        The value of myMessage is: @ViewData["myMessage"]
+    </p>
+    <p>
+        The greeting is: @ViewData["greeting"]
+    </p>
+    <p>
+        Here in Ukraine: @currentDate.DayOfWeek.ToString()
+    </p>
+    <p>
+        We wish you: @{
+            if (currentDate.Hour >= 6 && currentDate.Hour < 18)
+            {
+                @:Good Morning!
+            }
+            else
+            {
+                @:Good Evening!
+            }
+        }
+    </p>
+    <p>
+        Today is @currentDate.DayOfWeek.ToString()
+    </p>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>
+                    <bold>Name<bold>
+                </th>
+                <th>
+                    <bold>Value</bold>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Day</td>
+                <td>@currentDate.Day</td>
+            </tr>
+            <tr>
+                <td>Hour</td>
+                <td>@currentDate.Hour</td>
+            </tr>
+            <tr>
+                <td>Minute</td>
+                <td>@currentDate.Minute</td>
+            </tr>
+            <tr>
+                <td>Second</td>
+                <td>@currentDate.Second</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

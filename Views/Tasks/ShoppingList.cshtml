@@ -1,0 +1,24 @@
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Our Shoping list";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <table style="border-collapse: collapse;">
+        <tr>
+            <th>Name</th>
+            <th>Count</th>
+        </tr>
+        @foreach (Product product in Model)
+        {
+            <tr>
+                <td style="border: 1px solid black;">@product.Name</td>
+                <td style="border: 1px solid black;">@product.Count</td>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>@await Html.PartialAsync("_TimeToBuy.cshtml")</div>

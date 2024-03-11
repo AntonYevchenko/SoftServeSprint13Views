@@ -1,0 +1,24 @@
+@model IEnumerable<DateTime>
+
+<head>
+    <style>
+        .delivery-time-list {
+            list-style-type: none;
+            padding: 0;
+        }
+    </style>
+</head>
+
+<ul class="delivery-time-list">
+    @{
+        var index = 0;
+        foreach (DateTime deliveryTime in Model)
+        {
+            <li>
+                <input type="radio" name="deliveryTime" value="@deliveryTime.ToString("M/d/yyyy h:mm:ss tt");" @(index == 0 ? "checked" : "")>
+                <label for="deliveryTime_@index">@deliveryTime</label>
+            </li>
+            index++;
+        }
+    }
+</ul>
